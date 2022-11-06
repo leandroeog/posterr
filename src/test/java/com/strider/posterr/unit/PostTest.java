@@ -58,6 +58,24 @@ public class PostTest {
     }
 
     @Test
+    public void postsCantBeNull() {
+
+        UUID postUserId = UUID.randomUUID();
+
+        assertThrows(InvalidPostException.class, () ->  new Post(postUserId, null));
+
+    }
+
+    @Test
+    public void postsCantBeEmpty() {
+
+        UUID postUserId = UUID.randomUUID();
+
+        assertThrows(InvalidPostException.class, () ->  new Post(postUserId, ""));
+
+    }
+
+    @Test
     public void quotesCanBeReposted() throws InvalidPostException {
 
         Post quote = createQuote();
@@ -67,6 +85,28 @@ public class PostTest {
 
         assertEquals(repostUserId, repost.getUserId());
         assertEquals(quote.getId(), repost.getOtherPostId());
+
+    }
+
+    @Test
+    public void quotesCantBeNull() throws InvalidPostException {
+
+        Post post = createPost();
+
+        UUID quoteUserId = UUID.randomUUID();
+
+        assertThrows(InvalidPostException.class, () ->  post.quote(quoteUserId, null));
+
+    }
+
+    @Test
+    public void quotesCantBeEmpty() throws InvalidPostException {
+
+        Post post = createPost();
+
+        UUID quoteUserId = UUID.randomUUID();
+
+        assertThrows(InvalidPostException.class, () ->  post.quote(quoteUserId, ""));
 
     }
 

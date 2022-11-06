@@ -22,34 +22,32 @@ public class Post {
     //post
     public Post(UUID userId, String comment) throws InvalidPostException {
 
+        validate(comment);
+
         this.id = UUID.randomUUID();
         this.userId = userId;
         this.comment = comment;
 
-        validate(this);
-
     }
 
     //repost
-    private Post(UUID otherPostId, UUID userId) throws InvalidPostException {
+    private Post(UUID otherPostId, UUID userId) {
 
         this.id = UUID.randomUUID();
         this.otherPostId = otherPostId;
         this.userId = userId;
-
-        validate(this);
 
     }
 
     //quote
     private Post(UUID otherPostId, UUID userId, String comment) throws InvalidPostException {
 
+        validate(comment);
+
         this.id = UUID.randomUUID();
         this.otherPostId = otherPostId;
         this.userId = userId;
         this.comment = comment;
-
-        validate(this);
 
     }
 
@@ -69,13 +67,6 @@ public class Post {
 
     public Post quote(UUID userId, String comment) throws InvalidPostException {
         return new Post(this.id, userId, comment);
-    }
-
-    private void validate(Post post) throws InvalidPostException {
-
-        if (post.comment != null && post.comment.length() > 777) {
-            throw new InvalidPostException("Sorry, you can create a post with 777 characters at max");
-        }
 
     }
 
@@ -83,8 +74,16 @@ public class Post {
         return otherPostId != null && comment == null;
     }
 
-    private boolean isQuote() {
-        return otherPostId != null && comment != null;
+    private static void validate(String comment) throws InvalidPostException {
+
+        if (comment == null || comment.isEmpty()) {
+            throw new InvalidPostException("Please, inform something in your comment");
+        }
+
+        if (comment.length() > 777) {
+            throw new InvalidPostException("Sorry, you can create a post with 777 characters at max");
+        }
+
     }
 
 }
