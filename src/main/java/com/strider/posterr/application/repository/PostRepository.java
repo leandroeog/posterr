@@ -17,4 +17,6 @@ public interface PostRepository {
 
     void save(Post post);
 
+    long countByUser(UUID userId);
+
 }

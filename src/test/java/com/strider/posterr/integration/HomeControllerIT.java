@@ -6,7 +6,6 @@ import com.strider.posterr.application.infra.database.entity.PostEntity;
 import com.strider.posterr.application.infra.database.repository.PostJpaRepository;
 import com.strider.posterr.application.infra.fake.UserFake;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -20,7 +19,6 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @AutoConfigureMockMvc
@@ -39,6 +37,8 @@ public class HomeControllerIT {
 
     @Test
     public void homeShouldShowLast10() throws Exception {
+
+        generatePosts();
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders.get("/api/home"))
@@ -61,6 +61,8 @@ public class HomeControllerIT {
     @Test
     public void homeShouldShowOnlyPrivate() throws Exception {
 
+        generatePosts();
+
         this.mockMvc
                 .perform(MockMvcRequestBuilders.get("/api/home").param("isPrivate", "true"))
                 .andDo(print())
@@ -71,6 +73,8 @@ public class HomeControllerIT {
 
     @Test
     public void homeShouldFilterByStartDate() throws Exception {
+
+        generatePosts();
 
         String startDate = LocalDate.now().plusDays(1).toString();
 
@@ -85,6 +89,8 @@ public class HomeControllerIT {
     @Test
     public void homeShouldFilterByEndDate() throws Exception {
 
+        generatePosts();
+
         String endDate = LocalDate.now().minusDays(1).toString();
 
         this.mockMvc
@@ -98,6 +104,8 @@ public class HomeControllerIT {
     @Test
     public void homeShouldFilterByPeriod() throws Exception {
 
+        generatePosts();
+
         String startDate = LocalDate.now().minusDays(1).toString();
         String endDate = LocalDate.now().plusDays(1).toString();
 
@@ -109,8 +117,9 @@ public class HomeControllerIT {
 
     }
 
-    @BeforeEach
     public void generatePosts() {
+
+        clearPosts();
 
         int quantity = 15;
 
@@ -131,6 +140,10 @@ public class HomeControllerIT {
 
         }
 
+    }
+
+    private void clearPosts() {
+        postJpaRepository.deleteAll();
     }
 
 }

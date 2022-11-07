@@ -71,4 +71,9 @@ public class PostH2Repository implements PostRepository {
 
     }
 
+    @Override
+    public long countByUser(UUID userId) {
+        return postJpaRepository.countByUserId(userId);
+    }
+
 }

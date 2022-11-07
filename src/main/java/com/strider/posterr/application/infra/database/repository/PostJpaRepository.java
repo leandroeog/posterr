@@ -10,4 +10,6 @@ import java.util.UUID;
 @Repository
 public interface PostJpaRepository extends JpaRepository<PostEntity, UUID>, JpaSpecificationExecutor<PostEntity> {
 
+    long countByUserId(UUID userId);
+
 }
