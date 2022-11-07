@@ -2,8 +2,12 @@ package com.strider.posterr.application.infra.database.repository;
 
 import com.strider.posterr.application.domain.entity.Post;
 import com.strider.posterr.application.infra.database.entity.PostEntity;
+import com.strider.posterr.application.infra.database.specification.PostEntitySpecification;
 import com.strider.posterr.application.repository.PostRepository;
+import com.strider.posterr.application.repository.filter.HomeFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -30,6 +34,25 @@ public class PostH2Repository implements PostRepository {
                 entity.getComment(),
                 entity.getTimestamp()
         );
+
+    }
+
+    @Override
+    public Page<Post> findAll(HomeFilter filter, Pageable pageable) {
+
+        PostEntitySpecification specification = new PostEntitySpecification(
+                filter.getUserId(),
+                filter.getStartDate(),
+                filter.getEndDate()
+        );
+
+        return postJpaRepository.findAll(specification, pageable).map(it -> new Post(
+                it.getId(),
+                it.getOtherPostId(),
+                it.getUserId(),
+                it.getComment(),
+                it.getTimestamp()
+        ));
 
     }
 

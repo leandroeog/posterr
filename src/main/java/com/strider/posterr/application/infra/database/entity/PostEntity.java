@@ -23,14 +23,14 @@ public class PostEntity {
     @Type(type = "uuid-char")
     private UUID otherPostId;
 
-    @Column(name = "id_user")
+    @Column(name = "id_user", nullable = false)
     @Type(type = "uuid-char")
     private UUID userId;
 
     @Column(length = 777)
     private String comment;
 
-    @Column
+    @Column(nullable = false)
     private LocalDateTime timestamp;
 
 }
