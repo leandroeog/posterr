@@ -1,12 +1,14 @@
-package com.strider.posterr.domain.entity;
+package com.strider.posterr.application.domain.entity;
 
-import com.strider.posterr.domain.exception.InvalidPostException;
+import com.strider.posterr.application.domain.exception.InvalidPostException;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
+@AllArgsConstructor
 public class Post {
 
     private UUID id;

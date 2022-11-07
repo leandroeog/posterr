@@ -1,7 +1,7 @@
 package com.strider.posterr.unit;
 
-import com.strider.posterr.domain.entity.Post;
-import com.strider.posterr.domain.exception.InvalidPostException;
+import com.strider.posterr.application.domain.entity.Post;
+import com.strider.posterr.application.domain.exception.InvalidPostException;
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;

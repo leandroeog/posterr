@@ -1,4 +1,4 @@
-package com.strider.posterr.domain.exception;
+package com.strider.posterr.application.domain.exception;
 
 public class InvalidPostException extends Exception {
 
