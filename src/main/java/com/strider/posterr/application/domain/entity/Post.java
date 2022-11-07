@@ -11,7 +11,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Post {
 
-    private UUID id;
+    private UUID id = UUID.randomUUID();
 
     private UUID otherPostId;
 
@@ -26,7 +26,6 @@ public class Post {
 
         validate(comment);
 
-        this.id = UUID.randomUUID();
         this.userId = userId;
         this.comment = comment;
 
@@ -35,7 +34,6 @@ public class Post {
     //repost
     private Post(UUID otherPostId, UUID userId) {
 
-        this.id = UUID.randomUUID();
         this.otherPostId = otherPostId;
         this.userId = userId;
 
@@ -46,7 +44,6 @@ public class Post {
 
         validate(comment);
 
-        this.id = UUID.randomUUID();
         this.otherPostId = otherPostId;
         this.userId = userId;
         this.comment = comment;

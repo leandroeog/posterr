@@ -20,8 +20,12 @@ public class UserFake {
 
     }
 
-    public static UUID getDefault() {
+    public static UUID getFirst() {
         return users[0];
+    }
+
+    public static UUID getLast() {
+        return users[users.length - 1];
     }
 
 }

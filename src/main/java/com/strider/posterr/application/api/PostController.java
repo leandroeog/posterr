@@ -1,6 +1,7 @@
 package com.strider.posterr.application.api;
 
 import com.strider.posterr.application.domain.exception.InvalidPostException;
+import com.strider.posterr.application.infra.fake.UserFake;
 import com.strider.posterr.application.usecase.CreatePostUseCase;
 import com.strider.posterr.application.usecase.CreateQuoteUseCase;
 import com.strider.posterr.application.usecase.CreateRepostUseCase;
@@ -40,7 +41,7 @@ public class PostController {
 
         try {
 
-            UUID userId = UUID.randomUUID();
+            UUID userId = UserFake.getFirst();
 
             PostInput input = new PostInput(userId, comment);
 
@@ -59,7 +60,7 @@ public class PostController {
 
         try {
 
-            UUID userId = UUID.randomUUID();
+            UUID userId = UserFake.getLast();
 
             RepostInput input = new RepostInput(id, userId);
 
@@ -78,7 +79,7 @@ public class PostController {
 
         try {
 
-            UUID userId = UUID.randomUUID();
+            UUID userId = UserFake.getFirst();
 
             QuoteInput input = new QuoteInput(id, userId, comment);
 

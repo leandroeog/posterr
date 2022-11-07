@@ -2,8 +2,6 @@ package com.strider.posterr.integration;
 
 import com.jayway.jsonpath.JsonPath;
 import com.strider.posterr.PosterrApplication;
-import com.strider.posterr.application.domain.entity.Post;
-import com.strider.posterr.application.domain.exception.InvalidPostException;
 import com.strider.posterr.application.infra.database.entity.PostEntity;
 import com.strider.posterr.application.infra.database.repository.PostJpaRepository;
 import com.strider.posterr.application.infra.fake.UserFake;
@@ -67,7 +65,7 @@ public class HomeControllerIT {
                 .perform(MockMvcRequestBuilders.get("/api/home").param("isPrivate", "true"))
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.posts.content[*].userId").value(Matchers.hasItem(UserFake.getDefault().toString())));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.posts.content[*].userId").value(Matchers.hasItem(UserFake.getFirst().toString())));
 
     }
 
@@ -118,7 +116,7 @@ public class HomeControllerIT {
 
         while (quantity > 0) {
 
-            UUID userId = quantity > 5 ? UserFake.getRandom() : UserFake.getDefault();
+            UUID userId = quantity > 5 ? UserFake.getFirst() : UserFake.getLast();
 
             PostEntity entity = new PostEntity();
 

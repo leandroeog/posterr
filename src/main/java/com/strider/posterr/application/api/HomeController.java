@@ -36,7 +36,7 @@ public class HomeController {
 
         try {
 
-            UUID userId = isPrivate ? UserFake.getDefault() : UserFake.getRandom();
+            UUID userId = isPrivate ? UserFake.getFirst() : UserFake.getRandom();
 
             HomeInput input = new HomeInput(isPrivate, startDate, endDate, userId, pageNumber);
 

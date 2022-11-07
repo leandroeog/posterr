@@ -2,6 +2,7 @@ package com.strider.posterr.unit;
 
 import com.strider.posterr.application.domain.entity.Post;
 import com.strider.posterr.application.domain.exception.InvalidPostException;
+import com.strider.posterr.application.infra.fake.UserFake;
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
@@ -14,7 +15,7 @@ public class PostTest {
     @Test
     public void postsCantHaveMoreThan777Characters() {
 
-        UUID userId = UUID.randomUUID();
+        UUID userId = UserFake.getRandom();
 
         assertThrows(InvalidPostException.class, () -> new Post(userId, "7".repeat(778)));
 
@@ -25,7 +26,7 @@ public class PostTest {
 
         Post post = createPost();
 
-        UUID repostUserId = UUID.randomUUID();
+        UUID repostUserId = UserFake.getLast();
         Post repost = post.repost(repostUserId);
 
         assertEquals(repostUserId, repost.getUserId());
@@ -38,7 +39,7 @@ public class PostTest {
 
         Post post = createPost();
 
-        UUID quoteUserId = UUID.randomUUID();
+        UUID quoteUserId = UserFake.getRandom();
         String quoteComment = "my quote comment";
         Post quote = post.quote(quoteUserId, quoteComment);
 
@@ -60,7 +61,7 @@ public class PostTest {
     @Test
     public void postsCantBeNull() {
 
-        UUID postUserId = UUID.randomUUID();
+        UUID postUserId = UserFake.getRandom();
 
         assertThrows(InvalidPostException.class, () ->  new Post(postUserId, null));
 
@@ -69,7 +70,7 @@ public class PostTest {
     @Test
     public void postsCantBeEmpty() {
 
-        UUID postUserId = UUID.randomUUID();
+        UUID postUserId = UserFake.getRandom();
 
         assertThrows(InvalidPostException.class, () ->  new Post(postUserId, ""));
 
@@ -80,7 +81,7 @@ public class PostTest {
 
         Post quote = createQuote();
 
-        UUID repostUserId = UUID.randomUUID();
+        UUID repostUserId = UserFake.getLast();
         Post repost = quote.repost(repostUserId);
 
         assertEquals(repostUserId, repost.getUserId());
@@ -93,7 +94,7 @@ public class PostTest {
 
         Post post = createPost();
 
-        UUID quoteUserId = UUID.randomUUID();
+        UUID quoteUserId = UserFake.getRandom();
 
         assertThrows(InvalidPostException.class, () ->  post.quote(quoteUserId, null));
 
@@ -104,7 +105,7 @@ public class PostTest {
 
         Post post = createPost();
 
-        UUID quoteUserId = UUID.randomUUID();
+        UUID quoteUserId = UserFake.getRandom();
 
         assertThrows(InvalidPostException.class, () ->  post.quote(quoteUserId, ""));
 
@@ -115,7 +116,7 @@ public class PostTest {
 
         Post repost = createRepost();
 
-        UUID repostUserId = UUID.randomUUID();
+        UUID repostUserId = UserFake.getRandom();
 
         assertThrows(InvalidPostException.class, () -> repost.repost(repostUserId));
 
@@ -126,7 +127,7 @@ public class PostTest {
 
         Post repost = createRepost();
 
-        UUID quoteUserId = UUID.randomUUID();
+        UUID quoteUserId = UserFake.getRandom();
         String quoteComment = "my quote comment";
         Post quote = repost.quote(quoteUserId, quoteComment);
 
@@ -137,15 +138,15 @@ public class PostTest {
     }
 
     private Post createPost() throws InvalidPostException {
-        return new Post(UUID.randomUUID(), "my post comment");
+        return new Post(UserFake.getFirst(), "my post comment");
     }
 
     private Post createRepost() throws InvalidPostException {
-        return new Post(UUID.randomUUID(), "my post comment").repost(UUID.randomUUID());
+        return new Post(UserFake.getFirst(), "my post comment").repost(UserFake.getLast());
     }
 
     private Post createQuote() throws InvalidPostException {
-        return new Post(UUID.randomUUID(), "my post comment").quote(UUID.randomUUID(), "my quote comment");
+        return new Post(UserFake.getFirst(), "my post comment").quote(UserFake.getFirst(), "my quote comment");
     }
 
 }
