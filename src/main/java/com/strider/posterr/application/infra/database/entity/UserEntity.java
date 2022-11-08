@@ -1,5 +1,6 @@
 package com.strider.posterr.application.infra.database.entity;
 
+import com.strider.posterr.application.domain.entity.User;
 import lombok.Data;
 import org.hibernate.annotations.Type;
 
@@ -19,7 +20,7 @@ public class UserEntity {
     @Type(type = "uuid-char")
     private UUID id;
 
-    @Column(length = 14, nullable = false)
+    @Column(length = User.USERNAME_MAX_LENGTH, nullable = false)
     private String username;
 
     @Column(nullable = false)

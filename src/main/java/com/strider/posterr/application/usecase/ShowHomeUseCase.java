@@ -17,9 +17,8 @@ public class ShowHomeUseCase {
 
     private final PostRepository postRepository;
 
-    private static final int POSTS_HOME_SIZE = 10;
-
-    private static final String POSTS_HOME_ORDER_BY = "timestamp";
+    private static final int HOME_SIZE = 10;
+    private static final String HOME_ORDER_BY = "timestamp";
 
     public ShowHomeUseCase(@Qualifier("postH2Repository") PostRepository postRepository) {
         this.postRepository = postRepository;
@@ -29,8 +28,8 @@ public class ShowHomeUseCase {
 
         Pageable pageable = PageRequest.of(
                 input.getPageNumber(),
-                POSTS_HOME_SIZE,
-                Sort.by(Sort.Order.desc(POSTS_HOME_ORDER_BY))
+                HOME_SIZE,
+                Sort.by(Sort.Order.desc(HOME_ORDER_BY))
         );
 
         HomeFilter filter = new HomeFilter(

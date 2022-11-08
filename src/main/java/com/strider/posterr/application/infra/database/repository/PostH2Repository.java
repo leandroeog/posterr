@@ -5,6 +5,7 @@ import com.strider.posterr.application.infra.database.entity.PostEntity;
 import com.strider.posterr.application.infra.database.specification.PostEntitySpecification;
 import com.strider.posterr.application.repository.PostRepository;
 import com.strider.posterr.application.repository.filter.HomeFilter;
+import com.strider.posterr.application.repository.filter.UserFeedFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -45,6 +46,21 @@ public class PostH2Repository implements PostRepository {
                 filter.getStartDate(),
                 filter.getEndDate()
         );
+
+        return postJpaRepository.findAll(specification, pageable).map(it -> new Post(
+                it.getId(),
+                it.getOtherPostId(),
+                it.getUserId(),
+                it.getComment(),
+                it.getTimestamp()
+        ));
+
+    }
+
+    @Override
+    public Page<Post> findAll(UserFeedFilter filter, Pageable pageable) {
+
+        PostEntitySpecification specification = new PostEntitySpecification(filter.getUserId(), null, null);
 
         return postJpaRepository.findAll(specification, pageable).map(it -> new Post(
                 it.getId(),

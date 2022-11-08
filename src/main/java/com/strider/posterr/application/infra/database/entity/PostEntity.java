@@ -1,5 +1,6 @@
 package com.strider.posterr.application.infra.database.entity;
 
+import com.strider.posterr.application.domain.entity.Post;
 import lombok.Data;
 import org.hibernate.annotations.Type;
 
@@ -27,7 +28,7 @@ public class PostEntity {
     @Type(type = "uuid-char")
     private UUID userId;
 
-    @Column(length = 777)
+    @Column(length = Post.COMMENT_MAX_LENGTH)
     private String comment;
 
     @Column(nullable = false)

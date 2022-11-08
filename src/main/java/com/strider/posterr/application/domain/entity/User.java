@@ -12,6 +12,9 @@ import java.util.regex.Pattern;
 @AllArgsConstructor
 public class User {
 
+    public static final int USERNAME_MAX_LENGTH = 14;
+    public static final String ALPHANUMERIC_REGEX = "^[a-zA-Z0-9]+$";
+
     private UUID id = UUID.randomUUID();
 
     private String username;
@@ -32,11 +35,11 @@ public class User {
             throw new InvalidUserException("Please, inform something as your username");
         }
 
-        if (username.length() > 14) {
-            throw new InvalidUserException("Sorry, you can create your username with 14 characters at max");
+        if (username.length() > USERNAME_MAX_LENGTH) {
+            throw new InvalidUserException("Sorry, you can create your username with " + USERNAME_MAX_LENGTH + " characters at max");
         }
 
-        if (!Pattern.compile("^[a-zA-Z0-9]+$").matcher(username).matches()) {
+        if (!Pattern.compile(ALPHANUMERIC_REGEX).matcher(username).matches()) {
             throw new InvalidUserException("Sorry, you can't create your username with non alphanumeric characters");
         }
 

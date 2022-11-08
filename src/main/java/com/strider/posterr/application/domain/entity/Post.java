@@ -11,6 +11,8 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Post {
 
+    public static final int COMMENT_MAX_LENGTH = 777;
+
     private UUID id = UUID.randomUUID();
 
     private UUID otherPostId;
@@ -79,8 +81,8 @@ public class Post {
             throw new InvalidPostException("Please, inform something in your comment");
         }
 
-        if (comment.length() > 777) {
-            throw new InvalidPostException("Sorry, you can create a post with 777 characters at max");
+        if (comment.length() > COMMENT_MAX_LENGTH) {
+            throw new InvalidPostException("Sorry, you can create a post with " + COMMENT_MAX_LENGTH + " characters at max");
         }
 
     }
