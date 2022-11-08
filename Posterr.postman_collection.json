@@ -1,0 +1,189 @@
+{
+	"info": {
+		"_postman_id": "4500ce4a-13e8-454c-928f-d1fec7cb0cfb",
+		"name": "Posterr",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11136263"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/api/post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "test123456",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/post",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/post/:id/repost",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/post/:id/repost",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"post",
+						":id",
+						"repost"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "f5f1dd63-1da5-48f7-9867-0d40876a0491"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/post/:id/quote",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "quote test",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/post/:id/quote",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"post",
+						":id",
+						"quote"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "5a884c95-1f63-481b-9baf-e3d10e60ff9b"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/home",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/home",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"home"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "2022-11-07",
+							"disabled": true
+						},
+						{
+							"key": "endDate",
+							"value": "2022-11-07",
+							"disabled": true
+						},
+						{
+							"key": "isPrivate",
+							"value": "false",
+							"disabled": true
+						},
+						{
+							"key": "pageNumber",
+							"value": "0",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/user/profile",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/user/profile",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/user/feed",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/user/feed",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"feed"
+					],
+					"query": [
+						{
+							"key": "pageNumber",
+							"value": "0",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
